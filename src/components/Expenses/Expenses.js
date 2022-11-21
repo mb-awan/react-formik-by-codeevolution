@@ -9,10 +9,23 @@ export const Expenses = (props) => {
     const FilterChangeHandler = year => {
         setFilteredYear(year);
     }
+    const filteredExpenses = props.items.filter(expense =>
+        expense.date.getFullYear().toString() === filteredYear
+    );
+
+    let expensesContent = <p style={{color:"white", textAlign: "center"}}>No Expenses in year {filteredYear}</p>;
+    filteredExpenses.length && (expensesContent = filteredExpenses.map(expense =>
+        <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+        />));
+
     return (
         <Card className="expenses">
             <ExpenseFilter selectedYear = {filteredYear} onChangeFilter = {FilterChangeHandler}/>
-            {props.items.map(expense => <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)}
+            { expensesContent }
         </Card>
     )
 }
