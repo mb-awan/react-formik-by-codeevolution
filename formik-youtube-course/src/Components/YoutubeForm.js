@@ -25,8 +25,6 @@ export const YoutubeForm = props => {
         */
         const error = {};
 
-        console.log({touched: formik.touched,values:  formik.values, errors: formik.errors});
-
         if((values.email || values.channel) && !values.name) {
             error.name = "name is required first";
             formik.touched.name = true;
@@ -58,9 +56,7 @@ export const YoutubeForm = props => {
                     type='text'
                     id='name'
                     name='name'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.name}
+                    { ...formik.getFieldProps('name')}
                     ref={nameRef}
                 />
                 {formik.touched.name && formik.errors.name && <div className={styles.error}>{formik.errors.name}</div>}
@@ -72,9 +68,7 @@ export const YoutubeForm = props => {
                     type='email'
                     id='email'
                     name='email'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
+                    { ...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email && <div className={styles.error}>{formik.errors.email}</div>}
             </div>
@@ -85,9 +79,8 @@ export const YoutubeForm = props => {
                     type='text'
                     id='channel'
                     name='channel'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.channel}
+                    { ...formik.getFieldProps('channel')}
+
                 />
                 {formik.touched.channel && formik.errors.channel && <div className={styles.error}>{formik.errors.channel}</div>}
             </div>
