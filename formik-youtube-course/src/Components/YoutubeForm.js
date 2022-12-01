@@ -10,6 +10,11 @@ const validationSchema = Yup.object({
     address: Yup.string().required('Address is required')
 });
 
+const ErrorMessageContainer = props => {
+    return <div className={styles.error}>{props.children}</div>
+}
+
+
 export const YoutubeForm = props => {
     const initialValues =  {
         name: '',
@@ -34,7 +39,7 @@ export const YoutubeForm = props => {
                         id='name'
                         name='name'
                     />
-                    <ErrorMessage name='name'/>
+                    <ErrorMessage name='name' component={ErrorMessageContainer}/>
                 </div>
 
                 <div className={styles['form-control']}>
@@ -44,7 +49,12 @@ export const YoutubeForm = props => {
                         id='email'
                         name='email'
                     />
-                    <ErrorMessage name='email'/>
+                    {/*Error Message Wrapper using props render pattern*/}
+                    <ErrorMessage name='email'>
+                        {props => {
+                            return <div className={styles.error}>{props}</div>
+                        }}
+                    </ErrorMessage>
                 </div>
 
                 <div className={styles['form-control']}>
@@ -54,7 +64,7 @@ export const YoutubeForm = props => {
                         id='channel'
                         name='channel'
                     />
-                    <ErrorMessage name='channel'/>
+                    <ErrorMessage name='channel' component={ErrorMessageContainer}/>
                 </div>
 
                 <div className={styles['form-control']}>
@@ -64,7 +74,7 @@ export const YoutubeForm = props => {
                         id='comment'
                         name='comment'
                     />
-                    <ErrorMessage name='comment'/>
+                    <ErrorMessage name='comment' component={ErrorMessageContainer}/>
                 </div>
 
                 {/* Props Render Method:  We can also create our custom input element using Field Component of formik*/}
@@ -72,11 +82,11 @@ export const YoutubeForm = props => {
                     <label>Address</label>
                     <Field name='address'>
                         { props => {
-                            const { field, form, meta} = props;
+                            const { field, meta} = props; // one more property form also exist in props objects in Field component props
                             return (
                                 <>
                                     <input id='address' type='text' {...field}/>
-                                    {meta.touched && meta.error && <div>{meta.error}</div>}
+                                    {meta.touched && meta.error && <div className={styles.error}>{meta.error}</div>}
                                 </>
                             )
                         }}
