@@ -42,8 +42,9 @@ export const YoutubeForm = props => {
                     name='name'
                     value={formik.values.name}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
-                {formik.errors.name && <div className={styles.error}>{formik.errors.name}</div>}
+                {formik.touched.name && formik.errors.name && <div className={styles.error}>{formik.errors.name}</div>}
             </div>
 
             <div className={styles['form-control']}>
@@ -54,8 +55,9 @@ export const YoutubeForm = props => {
                     name='email'
                     value={formik.values.email}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
-                {formik.errors.email && <div className={styles.error}>{formik.errors.email}</div>}
+                {formik.touched.email && formik.errors.email && <div className={styles.error}>{formik.errors.email}</div>}
             </div>
 
             <div className={styles['form-control']}>
@@ -66,8 +68,9 @@ export const YoutubeForm = props => {
                     name='channel'
                     value={formik.values.channel}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
-                {formik.errors.channel && <div className={styles.error}>{formik.errors.channel}</div>}
+                {formik.touched.channel && formik.errors.channel && <div className={styles.error}>{formik.errors.channel}</div>}
             </div>
 
             <div className={styles['form-control']}>
