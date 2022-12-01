@@ -7,12 +7,14 @@ export const YoutubeForm = props => {
             name: '',
             email: '',
             channel: ''
-        }
+        },
+        onSubmit: values => console.log('form data:', values),
+
     });
 
-    console.log(formik.values);
+    // console.log(formik.values);
     return (
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <div className={styles['form-control']}>
                 <label htmlFor='name'>Name</label>
                 <input
@@ -47,7 +49,7 @@ export const YoutubeForm = props => {
             </div>
 
             <div className={styles['form-control']}>
-                <button>Submit</button>
+                <button type='submit'>Submit</button>
             </div>
         </form>
     )
