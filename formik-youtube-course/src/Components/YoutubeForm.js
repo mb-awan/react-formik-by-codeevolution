@@ -20,7 +20,7 @@ export const YoutubeForm = props => {
         if(!values.email)
             error.email = "email is required";
         else if(!values.email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
-            error.email = "invalid email"
+            error.email = "invalid email format"
         if(!values.channel) error.channel = "channel is required";
         return error;
     }
@@ -32,7 +32,6 @@ export const YoutubeForm = props => {
         validate,
     });
 
-    console.log(formik.errors);
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className={styles['form-control']}>
@@ -44,6 +43,7 @@ export const YoutubeForm = props => {
                     value={formik.values.name}
                     onChange={formik.handleChange}
                 />
+                {formik.errors.name && <div className={styles.error}>{formik.errors.name}</div>}
             </div>
 
             <div className={styles['form-control']}>
@@ -55,6 +55,7 @@ export const YoutubeForm = props => {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                 />
+                {formik.errors.email && <div className={styles.error}>{formik.errors.email}</div>}
             </div>
 
             <div className={styles['form-control']}>
@@ -66,6 +67,7 @@ export const YoutubeForm = props => {
                     value={formik.values.channel}
                     onChange={formik.handleChange}
                 />
+                {formik.errors.channel && <div className={styles.error}>{formik.errors.channel}</div>}
             </div>
 
             <div className={styles['form-control']}>
