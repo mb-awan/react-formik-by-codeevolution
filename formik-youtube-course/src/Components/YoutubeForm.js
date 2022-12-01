@@ -1,7 +1,10 @@
 import styles from '../App.module.css';
 import { useFormik} from "formik";
+import {useRef} from "react";
 
 export const YoutubeForm = props => {
+    const nameRef = useRef();
+
     const initialValues =  {
         name: '',
         email: '',
@@ -16,7 +19,16 @@ export const YoutubeForm = props => {
             3. Each property value in returned object must be of type string.
         */
         const error = {};
-        if(!values.name) error.name = "name is required";
+
+        console.log({touched: formik.touched,values:  formik.values, errors: formik.errors});
+
+        if((values.email || values.channel) && !values.name) {
+            error.name = "name is required first";
+            formik.touched.name = true;
+            nameRef.current.focus();
+        }
+        else if(!values.name && !values.email && !values.channel) error.name = "name is required";
+
         if(!values.email)
             error.email = "email is required";
         else if(!values.email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
@@ -40,9 +52,10 @@ export const YoutubeForm = props => {
                     type='text'
                     id='name'
                     name='name'
-                    value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                    ref={nameRef}
                 />
                 {formik.touched.name && formik.errors.name && <div className={styles.error}>{formik.errors.name}</div>}
             </div>
@@ -53,9 +66,9 @@ export const YoutubeForm = props => {
                     type='email'
                     id='email'
                     name='email'
-                    value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    value={formik.values.email}
                 />
                 {formik.touched.email && formik.errors.email && <div className={styles.error}>{formik.errors.email}</div>}
             </div>
@@ -66,9 +79,9 @@ export const YoutubeForm = props => {
                     type='text'
                     id='channel'
                     name='channel'
-                    value={formik.values.channel}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    value={formik.values.channel}
                 />
                 {formik.touched.channel && formik.errors.channel && <div className={styles.error}>{formik.errors.channel}</div>}
             </div>
