@@ -1,6 +1,11 @@
 import styles from '../App.module.css';
 import { useFormik} from "formik";
 import {useRef} from "react";
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+    name: Yup.string("name must be a string").required("name is required")
+})
 
 export const YoutubeForm = props => {
     const nameRef = useRef();
@@ -42,6 +47,7 @@ export const YoutubeForm = props => {
         initialValues,
         onSubmit,
         validate,
+        validationSchema,
     });
 
     return (
