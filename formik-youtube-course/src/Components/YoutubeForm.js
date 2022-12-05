@@ -6,7 +6,7 @@ const validationSchema = Yup.object({
     name: Yup.string().required("name is required"),
     email: Yup.string().email("Invalid email").required("email is required"),
     channel: Yup.string().required("channel is required"),
-    comment: Yup.string().required('comment is required'),
+    // comment: Yup.string().required('comment is required'),
     address: Yup.string().required('Address is required')
 });
 
@@ -29,6 +29,12 @@ export const YoutubeForm = props => {
         phoneNumbers: ['', ''],
         phNumbers: ['']
     };
+
+    const commentValidation = value =>  {
+        let errMessage;
+        if(!value) errMessage= 'Required';
+        return errMessage;
+    }
 
     const onSubmit = values => console.log('form data:', values);
 
@@ -79,6 +85,7 @@ export const YoutubeForm = props => {
                         as='textarea'
                         id='comment'
                         name='comment'
+                        validate={commentValidation}
                     />
                     <ErrorMessage name='comment' component={ErrorMessageContainer}/>
                 </div>
