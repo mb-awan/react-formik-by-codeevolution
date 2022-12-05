@@ -25,7 +25,8 @@ export const YoutubeForm = props => {
         social: {
             fb: '',
             insta: ''
-        }
+        },
+        phoneNumbers: ['', '']
     };
 
     const onSubmit = values => console.log('form data:', values);
@@ -111,6 +112,12 @@ export const YoutubeForm = props => {
                         id='insta'
                         name='social.insta'
                     />
+                </div>
+
+                <div className={styles['form-control']}>
+                    <label>Phone Numbers:</label>
+                    <Field name='phoneNumbers[0]' placeholder='primary'></Field>
+                    <Field name='phoneNumbers[1]' placeholder='secondary'></Field>
                 </div>
 
                 <div className={styles['form-control']}>
