@@ -1,5 +1,5 @@
 import styles from '../App.module.css';
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik, FieldArray} from "formik";
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object({
@@ -16,7 +16,7 @@ const ErrorMessageContainer = props => {
 
 
 export const YoutubeForm = props => {
-    const initialValues =  {
+    const initialValues = {
         name: '',
         email: '',
         channel: '',
@@ -26,7 +26,8 @@ export const YoutubeForm = props => {
             fb: '',
             insta: ''
         },
-        phoneNumbers: ['', '']
+        phoneNumbers: ['', ''],
+        phNumbers: ['']
     };
 
     const onSubmit = values => console.log('form data:', values);
@@ -118,6 +119,26 @@ export const YoutubeForm = props => {
                     <label>Phone Numbers:</label>
                     <Field name='phoneNumbers[0]' placeholder='primary'></Field>
                     <Field name='phoneNumbers[1]' placeholder='secondary'></Field>
+                </div>
+
+                <div className={styles['form-control']}>
+                    <label>Dynamic Phone Numbers Array</label>
+                    <FieldArray name='phNumbers'>
+                        {
+                            fieldArrayProps => {
+                                const {push, remove, form} = fieldArrayProps;
+                                const {phNumbers} = form.values;
+                                return phNumbers.map((phNumber, index) => (
+                                        <div key={index}>
+                                            <Field name={`phNumbers[${index}]`}></Field>
+                                            { !!index && <button type='button' onClick={()=> {remove(index)}}>-</button>}
+                                            <button type='button' onClick={()=> { push('')}}>+</button>
+                                        </div>
+                                    )
+                                )
+                            }
+                        }
+                    </FieldArray>
                 </div>
 
                 <div className={styles['form-control']}>
