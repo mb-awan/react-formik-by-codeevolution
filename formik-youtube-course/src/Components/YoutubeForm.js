@@ -21,7 +21,11 @@ export const YoutubeForm = props => {
         email: '',
         channel: '',
         comment: '',
-        address: ''
+        address: '',
+        social: {
+            fb: '',
+            insta: ''
+        }
     };
 
     const onSubmit = values => console.log('form data:', values);
@@ -82,7 +86,7 @@ export const YoutubeForm = props => {
                     <label>Address</label>
                     <Field name='address'>
                         { props => {
-                            const { field, meta} = props; // one more property form also exist in props objects in Field component props
+                            const {field, meta} = props; // one more property form also exist in props objects in Field component props
                             return (
                                 <>
                                     <input id='address' type='text' {...field}/>
@@ -91,6 +95,22 @@ export const YoutubeForm = props => {
                             )
                         }}
                     </Field>
+                </div>
+
+                <div className={styles['form-control']}>
+                    <label htmlFor='fb'>Facebook: </label>
+                    <Field
+                        id='fb'
+                        name='social.fb'
+                    />
+                </div>
+
+                <div className={styles['form-control']}>
+                    <label htmlFor='insta'>Instagram: </label>
+                    <Field
+                        id='insta'
+                        name='social.insta'
+                    />
                 </div>
 
                 <div className={styles['form-control']}>
