@@ -54,8 +54,11 @@ export const YoutubeForm = props => {
 
     const onSubmit = (values, onSubmitProps) => {
         console.log('form data:', values);
+        console.log(onSubmitProps)
         setTimeout(()=> {
             onSubmitProps.setSubmitting(false);
+            onSubmitProps.resetForm();
+            setFormValues(null)
         }, 3000)
     };
 
