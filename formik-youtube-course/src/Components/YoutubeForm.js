@@ -1,6 +1,7 @@
 import styles from '../App.module.css';
 import {ErrorMessage, Field, Form, Formik, FieldArray} from "formik";
 import * as Yup from 'yup';
+import {useState} from "react";
 
 const validationSchema = Yup.object({
     name: Yup.string().required("name is required"),
@@ -16,12 +17,27 @@ const ErrorMessageContainer = props => {
 
 
 export const YoutubeForm = props => {
+    const [formValues, setFormValues] = useState(null);
     const initialValues = {
-        name: '',
+        name: 'pre',
         email: '',
         channel: '',
         comment: '',
         address: '',
+        social: {
+            fb: '',
+            insta: ''
+        },
+        phoneNumbers: ['', ''],
+        phNumbers: ['']
+    };
+
+    const dummySavedValuesFromSomeApi = {
+        name: 'Muhammad Bilal',
+        email: 'bilal@bilal.com',
+        channel: 'hahaha channel',
+        comment: 'hahahahahah',
+        address: 'hahahahahahhaha',
         social: {
             fb: '',
             insta: ''
@@ -45,9 +61,10 @@ export const YoutubeForm = props => {
 
     return (
         <Formik
-            initialValues={initialValues}
+            initialValues={formValues || initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
+            enableReinitialize
         >{
             formik => {
                 console.log(formik);
@@ -171,6 +188,8 @@ export const YoutubeForm = props => {
                                 comment: true
                             });
                         }}>Validate All</button>
+
+                        <button type='button' onClick={()=> setFormValues(dummySavedValuesFromSomeApi)}>Memic Fetch Load Data</button>
 
                         <div className={styles['form-control']}>
                             <button type='submit' disabled={formik.isSubmitting}>Submit</button>
