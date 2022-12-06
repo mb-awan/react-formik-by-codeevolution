@@ -1,10 +1,10 @@
-import style from './App.module.css';
-import { YoutubeForm } from './Components/YoutubeForm';
+import './App.css';
+import FormikContainer from "./Components/FormikContainer";
 
 const App = () => {
   return (
-    <div className={style.App}>
-      <YoutubeForm/>
+    <div className='App'>
+      <FormikContainer/>
     </div>
   );
 }
