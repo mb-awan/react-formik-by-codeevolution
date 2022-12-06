@@ -36,14 +36,18 @@ export const YoutubeForm = props => {
         return errMessage;
     }
 
-    const onSubmit = values => console.log('form data:', values);
+    const onSubmit = (values, onSubmitProps) => {
+        console.log('form data:', values);
+        setTimeout(()=> {
+            onSubmitProps.setSubmitting(false);
+        }, 3000)
+    };
 
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
-            validateOnMount={true}
         >{
             formik => {
                 console.log(formik);
@@ -169,7 +173,7 @@ export const YoutubeForm = props => {
                         }}>Validate All</button>
 
                         <div className={styles['form-control']}>
-                            <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+                            <button type='submit' disabled={formik.isSubmitting}>Submit</button>
                         </div>
                     </Form>
                 )
