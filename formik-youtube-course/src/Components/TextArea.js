@@ -1,12 +1,13 @@
 import {ErrorMessage, Field} from "formik";
 import TextError from "./TextError";
 
-const Input = (props) => {
+const TextArea = (props) => {
     const { name, label, ...rest} = props;
     return (
         <div className='form-control'>
             <label htmlFor={name}>{label}</label>
             <Field
+                as='textarea'
                 id={name}
                 name={name}
                 {...rest}
@@ -19,4 +20,4 @@ const Input = (props) => {
     )
 };
 
-export default Input;
+export default TextArea;
