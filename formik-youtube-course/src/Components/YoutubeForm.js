@@ -43,6 +43,7 @@ export const YoutubeForm = props => {
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
+            validateOnMount={true}
         >{
             formik => {
                 console.log(formik);
@@ -168,7 +169,7 @@ export const YoutubeForm = props => {
                         }}>Validate All</button>
 
                         <div className={styles['form-control']}>
-                            <button type='submit'>Submit</button>
+                            <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
                         </div>
                     </Form>
                 )
