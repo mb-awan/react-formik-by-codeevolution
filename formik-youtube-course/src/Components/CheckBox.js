@@ -18,7 +18,7 @@ const CheckBox = props => {
                                        value={option.value}
                                        checked={field.value.includes(option.value)}
                                 />
-                                <label htmlFor={option.value}>
+                                <label style={{ display: "inline"}}      htmlFor={option.value}>
                                     {option.key}
                                 </label>
                             </React.Fragment>

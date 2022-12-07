@@ -18,7 +18,7 @@ const Radio = props => {
                                        value={option.value}
                                        checked={field.value === option.value}
                                 />
-                                <label htmlFor={option.value}>
+                                <label style={{ display: "inline"}} htmlFor={option.value}>
                                     {option.key}
                                 </label>
                             </React.Fragment>
